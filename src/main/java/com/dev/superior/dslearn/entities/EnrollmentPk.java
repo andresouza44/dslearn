@@ -5,7 +5,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Embeddable
 public class EnrollmentPk {

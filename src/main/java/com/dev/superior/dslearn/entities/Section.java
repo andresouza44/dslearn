@@ -2,7 +2,7 @@ package com.dev.superior.dslearn.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name="tb_section")
@@ -24,6 +24,9 @@ public class Section {
     @ManyToOne
     @JoinColumn(name="prerequisite_id")
     private Section prerequisite;
+
+   @OneToMany(mappedBy = "section")
+    private List<Lesson> lessons = new ArrayList<>();
 
     public Section(){
 
@@ -96,6 +99,9 @@ public class Section {
         this.prerequisite = prerequisite;
     }
 
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
