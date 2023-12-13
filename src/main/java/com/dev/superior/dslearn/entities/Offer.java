@@ -3,12 +3,10 @@ package com.dev.superior.dslearn.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
-@Table(name="tb_offer")
+@Table(name = "tb_offer")
 public class Offer {
 
     @Id
@@ -23,13 +21,16 @@ public class Offer {
     private Instant endMoment;
 
     @ManyToOne
-    @JoinColumn(name="course_id")
+    @JoinColumn(name = "course_id")
     private Course course;
 
     @OneToMany(mappedBy = "offer")
     public List<Resource> resources = new ArrayList<>();
 
-    public Offer (){
+    @OneToMany(mappedBy = "id.offer")
+    private Set<Enrollment> enrolments = new HashSet<>();
+
+    public Offer() {
     }
 
     public Offer(Long id, String edition, Instant startMoment, Instant endMoment, Course course) {
@@ -83,6 +84,14 @@ public class Offer {
 
     public List<Resource> getResources() {
         return resources;
+    }
+
+    public Set<Enrollment> getEnrolments() {
+        return enrolments;
+    }
+
+    public List<User> getUsers(){
+        return  enrolments.stream().map(x -> x.getStudent()).toList();
     }
 
     @Override

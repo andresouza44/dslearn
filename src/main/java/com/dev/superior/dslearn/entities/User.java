@@ -25,6 +25,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications = new ArrayList<>();
 
+
+    @OneToMany(mappedBy = "id.user")
+    private Set<Enrollment> enrollments = new HashSet<>();
+
+
     public User(){
     }
 
@@ -73,6 +78,14 @@ public class User {
 
     public List<Notification> getNotifications() {
         return notifications;
+    }
+
+    public Set<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public  List<Offer> getOffers (){
+        return enrollments.stream().map(x -> x.getOffer()).toList();
     }
 
     @Override
