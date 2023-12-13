@@ -26,6 +26,9 @@ public class Offer {
     @JoinColumn(name="course_id")
     private Course course;
 
+    @OneToMany(mappedBy = "offer")
+    public List<Resource> resources = new ArrayList<>();
+
     public Offer (){
     }
 
@@ -76,6 +79,10 @@ public class Offer {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public List<Resource> getResources() {
+        return resources;
     }
 
     @Override
