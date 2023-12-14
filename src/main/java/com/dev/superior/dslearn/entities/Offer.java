@@ -30,6 +30,9 @@ public class Offer {
     @OneToMany(mappedBy = "id.offer")
     private Set<Enrollment> enrolments = new HashSet<>();
 
+    @OneToMany(mappedBy = "offer")
+    private List<Topic> topics = new ArrayList<>();
+
     public Offer() {
     }
 
@@ -92,6 +95,10 @@ public class Offer {
 
     public List<User> getUsers(){
         return  enrolments.stream().map(x -> x.getStudent()).toList();
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
     }
 
     @Override
