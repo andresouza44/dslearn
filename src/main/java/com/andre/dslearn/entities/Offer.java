@@ -22,6 +22,9 @@ public class Offer {
     @JoinColumn(name = "course_id")
     private Course course;
 
+    @OneToMany(mappedBy = "offer")
+    private List<Resource> resources = new ArrayList<>();
+
     public Offer(){
     }
 
@@ -73,6 +76,9 @@ public class Offer {
         this.course = course;
     }
 
+    public List<Resource> getResources() {
+        return resources;
+    }
 
     @Override
     public boolean equals(Object o) {
