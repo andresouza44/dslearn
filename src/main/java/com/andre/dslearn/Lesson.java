@@ -1,0 +1,98 @@
+package com.andre.dslearn;
+
+import com.andre.dslearn.entities.Enrollment;
+import com.andre.dslearn.entities.Section;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+@Entity
+@Table(name = "tb_lesson")
+@Inheritance(strategy = InheritanceType.JOINED) // cria tres tabela
+public abstract class Lesson {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private Integer position;
+
+    @ManyToOne()
+    @JoinColumn(name = "section_id")
+    private Section section;
+
+    @ManyToMany
+    @JoinTable(name = "tb_lesson_done",
+            joinColumns = @JoinColumn(name = "lesson_id"),
+            inverseJoinColumns = {
+                    @JoinColumn(name = "user_id"),
+                    @JoinColumn(name = "offer_id")}
+    )
+    private Set<Enrollment> enrollmentsDone = new HashSet<>();
+
+    public Lesson() {
+    }
+
+    public Lesson(Long id, String title, Integer position) {
+        this.id = id;
+        this.title = title;
+        this.position = position;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public Set<Enrollment> getEnrollmentsDone() {
+        return enrollmentsDone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Lesson lesson = (Lesson) o;
+
+        if (!Objects.equals(id, lesson.id)) return false;
+        return Objects.equals(enrollmentsDone, lesson.enrollmentsDone);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (enrollmentsDone != null ? enrollmentsDone.hashCode() : 0);
+        return result;
+    }
+}
