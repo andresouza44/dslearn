@@ -1,6 +1,5 @@
 package com.andre.dslearn.entities;
 
-import com.andre.dslearn.Lesson;
 import jakarta.persistence.*;
 
 import java.time.Instant;

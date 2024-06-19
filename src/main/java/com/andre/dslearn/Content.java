@@ -1,11 +1,12 @@
 package com.andre.dslearn;
 
+import com.andre.dslearn.entities.Lesson;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_content")
-public class Content extends Lesson{
+public class Content extends Lesson {
 
     private String textContent;
     private String VideoUri;

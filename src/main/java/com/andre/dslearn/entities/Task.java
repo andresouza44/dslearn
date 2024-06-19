@@ -1,10 +1,8 @@
 package com.andre.dslearn.entities;
 
-import com.andre.dslearn.Lesson;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.time.Instant;
 
@@ -18,19 +16,19 @@ public class Task extends Lesson {
     private Double weight;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant duoDate;
+    private Instant dueDate;
 
     public Task(){
     }
 
     public Task(Long id, String title, Integer position, String description,
-                Integer questionCount, Integer approvalCount, Double weight, Instant duoDate) {
+                Integer questionCount, Integer approvalCount, Double weight, Instant dueDate) {
         super(id, title, position);
         this.description = description;
         this.questionCount = questionCount;
         this.approvalCount = approvalCount;
         this.weight = weight;
-        this.duoDate = duoDate;
+        this.dueDate = dueDate;
     }
 
     public String getDescription() {
@@ -65,11 +63,11 @@ public class Task extends Lesson {
         this.weight = weight;
     }
 
-    public Instant getDuoDate() {
-        return duoDate;
+    public Instant getDueDate() {
+        return dueDate;
     }
 
-    public void setDuoDate(Instant duoDate) {
-        this.duoDate = duoDate;
+    public void setDueDate(Instant dueDate) {
+        this.dueDate = dueDate;
     }
 }

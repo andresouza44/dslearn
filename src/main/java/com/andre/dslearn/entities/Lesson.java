@@ -1,7 +1,5 @@
-package com.andre.dslearn;
+package com.andre.dslearn.entities;
 
-import com.andre.dslearn.entities.Enrollment;
-import com.andre.dslearn.entities.Section;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -25,7 +23,7 @@ public abstract class Lesson {
     private Section section;
 
     @ManyToMany
-    @JoinTable(name = "tb_lesson_done",
+    @JoinTable(name = "tb_lessons_done",
             joinColumns = @JoinColumn(name = "lesson_id"),
             inverseJoinColumns = {
                     @JoinColumn(name = "user_id"),
